@@ -1,0 +1,351 @@
+/* ------------------------------
+   1) Container & Layout
+------------------------------ */
+
+/* .pageContainer {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+} */
+
+.pageContainer {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Optional: Use column layout for stacking content */
+  justify-content: center; /* Center content vertically */
+  align-items: center;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  max-width: 1500px; margin: 0 auto;
+  overflow: visible;
+}
+
+.swiperBox {
+  flex: 0;
+  width: 100%;
+  max-width: 1400px;
+  height: 550px;
+  background: none;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.cardWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+.buttonBox {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: auto;
+  max-width: 100px;
+}
+
+
+
+/* ------------------------------
+   2) Flip Card Structure
+------------------------------ */
+
+.flipCard {
+  perspective: 1000px; /* 3D perspective for flip effect */
+  position: relative;
+  width: 250px;  /* Card width */
+  height: 400px; /* Card height */
+  margin: 0 auto;
+}
+
+.cardSide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hide the back side when not visible */
+  transition: transform 0.6s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.front {
+  background: white;          /* Default front color */
+  transform: rotateY(0deg);   /* Default position */
+}
+
+.back {
+  background: #f5f5f5;        /* Default back color */
+  transform: rotateY(180deg); /* Flipped position */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;  /* Scroll if content is too tall */
+  overflow-x: hidden;
+}
+
+/* Flip animation on hover */
+.flipCard:hover .front {
+  transform: rotateY(-180deg);
+}
+
+.flipCard:hover .back {
+  transform: rotateY(0deg);
+}
+
+/* ------------------------------
+   3) Active Swiper Slide Glow
+------------------------------ */
+
+.swiper-slide-active .flipCard {
+  position: relative;
+  z-index: 1;
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Dynamic glow based on part of speech */
+.swiper-slide-active .flipCard[data-color="noun"] {
+  box-shadow: 0 0 30px 15px rgba(0, 102, 255, 0.6);
+}
+
+.swiper-slide-active .flipCard[data-color="verb"] {
+  box-shadow: 0 0 30px 15px rgba(255, 0, 0, 0.6);
+}
+
+.swiper-slide-active .flipCard[data-color="adjective"] {
+  box-shadow: 0 0 30px 15px rgba(92, 0, 184, 0.6);
+}
+
+.swiper-slide-active .flipCard[data-color="article"] {
+  box-shadow: 0 0 30px 15px rgba(255, 215, 0, 0.6);
+}
+
+/* ------------------------------
+   4) Card Content & Typography
+------------------------------ */
+
+/* Main content area on the back of the card */
+.cardContent {
+  padding: 10px;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  flex-grow: 1;    /* Take up remaining space */
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Card Title (front) */
+.cardTitle {
+  font-size: 50px;
+  font-weight: 800;
+  color: whitesmoke;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Part-of-speech text (front) */
+.partOfSpeechTop {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.partOfSpeechBottom {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transform: rotate(180deg);
+  color: #333;
+}
+
+/* Definitions & Examples (back) */
+.definition,
+.exampleSentence,
+.exampleTranslation,
+.pronunciation {
+  margin-top: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: whitesmoke;
+}
+
+/* Card Sections on the back of the card */
+.cardSection {
+  margin-bottom: 2px;
+  padding: 4px 70px;
+  border: 1px solid rgba(255, 255, 255, 0.068);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.031);
+}
+s
+/* Key-value pairs (e.g., "Definition:" vs. actual definition) */
+.key {
+  font-weight: bold;  /* or 600 if preferred */
+  margin-bottom: 0.5rem;
+  margin-right: 5px;  /* to separate from value text */
+  color: #333;
+}
+
+.value {
+  margin-top: 0;
+  font-size: 12px;
+}
+
+/* ------------------------------
+   5) Buttons (Circle)
+------------------------------ */
+
+.circleButton {
+  background: linear-gradient(135deg, #4CAF50, #66BB6A);
+  border: none;
+  border-radius: 50%;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+  outline: none;
+  z-index: 1;
+}
+
+/* Hover effect with glow animation */
+.circleButton:hover {
+  animation: glow 1s ease-in-out infinite;
+}
+
+.circleButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #4CAF50;
+  border-radius: inherit;
+  filter: blur(10px);
+  opacity: 0.75;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+.circleButton:hover::before {
+  filter: blur(20px);
+  opacity: 1;
+}
+
+/* Edit Button (Yellow) */
+.editButton {
+  background: linear-gradient(135deg, #FFD700, #FFC107);
+}
+.editButton:hover {
+  animation: glow-yellow 1s ease-in-out infinite;
+}
+.editButton::before {
+  background: #FFD700;
+}
+.editButton:hover::before {
+  background: #FFD700; /* Ensure yellow matches */
+  filter: blur(20px);
+  opacity: 1;
+}
+
+/* Delete Button (Red) */
+.deleteButton {
+  background: linear-gradient(135deg, #FF4C4C, #FF0000);
+  font-size: 17px;
+}
+.deleteButton:hover {
+  animation: glow-red 1s ease-in-out infinite;
+}
+.deleteButton::before {
+  background: #FF4C4C;
+}
+.deleteButton:hover::before {
+  background: #FF4C4C; /* Ensure red matches */
+  filter: blur(20px);
+  opacity: 1;
+}
+
+
+/* ------------------------------
+   6) Animations
+------------------------------ */
+
+/* Glow Animation for Green Buttons (Default Circle Button) */
+@keyframes glow-green {
+  0% {
+    background: #4CAF50;
+  }
+  50% {
+    background: #66BB6A;
+  }
+  100% {
+    background: #4CAF50;
+  }
+}
+
+/* Glow Animation for Yellow Buttons (Edit) */
+@keyframes glow-yellow {
+  0% {
+    background: #FFD700;
+  }
+  50% {
+    background: #FFC107;
+  }
+  100% {
+    background: #FFD700;
+  }
+}
+
+/* Glow Animation for Red Buttons (Delete) */
+@keyframes glow-red {
+  0% {
+    background: #FF4C4C;
+  }
+  50% {
+    background: #FF0000;
+  }
+  100% {
+    background: #FF4C4C;
+  }
+}
