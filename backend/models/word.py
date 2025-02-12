@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .deck_words import deck_words  # ✅ Import the association table
 
 class Word(db.Model):
     __tablename__ = 'words'
@@ -15,20 +16,20 @@ class Word(db.Model):
     image_url = db.Column(db.String(255), nullable=True)
     card_count = db.Column(db.Integer, nullable=False, default=1)
 
-    # ✅ FIXED: Ensure schema-aware relationships
     part_of_speech = db.relationship('PartOfSpeech', back_populates='words')
     language = db.relationship('Language', back_populates='words')
 
-
+    # ✅ Use imported association table
     decks = db.relationship(
         "Deck",
+        secondary=deck_words,
         back_populates="words"
     )
 
-    pronunciation = db.Column(db.String(100), nullable=True)  # Optional field for romanized pronunciation
-    definition = db.Column(db.String(255), nullable=False)  # Word meaning/translation
-    example_sentence = db.Column(db.Text, nullable=True)  # Contextual example
-    example_translation = db.Column(db.Text, nullable=True)  # Translation of the example sentence
+    pronunciation = db.Column(db.String(100), nullable=True)
+    definition = db.Column(db.String(255), nullable=False)
+    example_sentence = db.Column(db.Text, nullable=True)
+    example_translation = db.Column(db.Text, nullable=True)
 
     def to_dict(self):
         return {

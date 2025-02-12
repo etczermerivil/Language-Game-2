@@ -1,6 +1,5 @@
-
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-# from .user import User  # Import User model to establish relationship
+from .deck_words import deck_words
 
 class Deck(db.Model):
     __tablename__ = "decks"
@@ -18,10 +17,11 @@ class Deck(db.Model):
 
     user = db.relationship("User", back_populates="decks")
 
-    # Change this relationship to directly reference Word
+    # ✅ Use imported association table
     words = db.relationship(
         "Word",
-        back_populates="deck"
+        secondary=deck_words,
+        back_populates="decks"
     )
 
     def to_dict(self):
