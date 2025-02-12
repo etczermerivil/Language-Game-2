@@ -1,7 +1,6 @@
 FROM python:3.9.18-alpine3.18
 
 RUN apk add build-base
-
 RUN apk add postgresql-dev gcc python3-dev musl-dev
 
 ARG FLASK_APP
@@ -19,6 +18,5 @@ RUN pip install psycopg2
 
 COPY . .
 
-RUN flask db upgrade
-RUN flask seed all
-CMD gunicorn backend:app
+# ✅ Run migrations & seeding when the container starts
+CMD flask db upgrade && flask seed all && gunicorn backend:app
