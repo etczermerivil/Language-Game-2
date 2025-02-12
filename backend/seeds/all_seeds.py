@@ -19,7 +19,10 @@ def seed_all():
     If in production, first run 'undo_all' to clear old data.
     """
     if environment == 'production':
-        undo_all()
+        undo_users()
+        undo_languages()
+        undo_parts_of_speech()
+        undo_words()
 
     seed_users()
     seed_languages()
