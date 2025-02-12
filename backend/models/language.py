@@ -10,8 +10,13 @@ class Language(db.Model):
     name = db.Column(db.String(50), nullable=False, unique=True)  # English, Spanish, etc.
     code = db.Column(db.String(10), nullable=False, unique=True)  # "en", "es", etc.
 
-    # Relationships
-    words = db.relationship('Word', back_populates='language', cascade='all, delete-orphan')
+    # ✅ FIXED: Added explicit schema-aware relationship
+    words = db.relationship(
+        'Word',
+        back_populates='language',
+        cascade='all, delete-orphan',
+        primaryjoin=f"{add_prefix_for_prod('Language.id')} == {add_prefix_for_prod('Word.language_id')}"
+    )
 
     def to_dict(self):
         return {

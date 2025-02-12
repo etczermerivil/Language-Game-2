@@ -10,8 +10,13 @@ class PartOfSpeech(db.Model):
     name = db.Column(db.String(50), nullable=False, unique=True)  # e.g., Noun, Verb
     color_code = db.Column(db.String(10), nullable=False)  # Hex color, e.g., "#FF0000"
 
-    # Relationships
-    words = db.relationship('Word', back_populates='part_of_speech', cascade='all, delete-orphan')
+    # ✅ FIXED: Added explicit schema-aware relationship
+    words = db.relationship(
+        'Word',
+        back_populates='part_of_speech',
+        cascade='all, delete-orphan',
+        primaryjoin=f"{add_prefix_for_prod('PartOfSpeech.id')} == {add_prefix_for_prod('Word.part_of_speech_id')}"
+    )
 
     def to_dict(self):
         return {

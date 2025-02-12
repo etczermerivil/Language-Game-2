@@ -1,6 +1,4 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
 from .db import db, deck_cards, environment, SCHEMA, add_prefix_for_prod
-
 
 class Word(db.Model):
     __tablename__ = 'words'
@@ -17,10 +15,17 @@ class Word(db.Model):
     image_url = db.Column(db.String(255), nullable=True)
     card_count = db.Column(db.Integer, nullable=False, default=1)
 
-    # Relationships
+    # ✅ FIXED: Ensure schema-aware relationships
     part_of_speech = db.relationship('PartOfSpeech', back_populates='words')
     language = db.relationship('Language', back_populates='words')
-    decks = db.relationship("Deck", secondary="deck_cards", back_populates="words")
+
+    # ✅ FIXED: Ensure schema-aware `deck_cards` association
+    decks = db.relationship(
+        "Deck",
+        secondary=add_prefix_for_prod("deck_cards"),
+        back_populates="words"
+    )
+
     pronunciation = db.Column(db.String(100), nullable=True)  # Optional field for romanized pronunciation
     definition = db.Column(db.String(255), nullable=False)  # Word meaning/translation
     example_sentence = db.Column(db.Text, nullable=True)  # Contextual example
