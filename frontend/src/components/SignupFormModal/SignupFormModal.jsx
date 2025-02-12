@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
 import "./SignupForm.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -42,68 +40,49 @@ function SignupFormModal() {
 
   return (
     <>
+      <h1>Sign Up</h1>
+      {errors.server && <p>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
-        {errors.server && <p className="error-text">{errors.server}</p>}
-
-        <div className="input-group">
-          <span className="input-icon">
-            <FontAwesomeIcon icon={faEnvelope} />
-          </span>
+        <label>
+          Email
           <input
             type="text"
-            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
-        {errors.email && <p className="error-text">{errors.email}</p>}
-
-        <div className="input-group">
-          <span className="input-icon">
-            <FontAwesomeIcon icon={faUser} />
-          </span>
+        </label>
+        {errors.email && <p>{errors.email}</p>}
+        <label>
+          Username
           <input
             type="text"
-            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-        </div>
-        {errors.username && <p className="error-text">{errors.username}</p>}
-
-        <div className="input-group">
-          <span className="input-icon">
-            <FontAwesomeIcon icon={faLock} />
-          </span>
+        </label>
+        {errors.username && <p>{errors.username}</p>}
+        <label>
+          Password
           <input
             type="password"
-            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-        {errors.password && <p className="error-text">{errors.password}</p>}
-
-        <div className="input-group">
-          <span className="input-icon">
-            <FontAwesomeIcon icon={faLock} />
-          </span>
+        </label>
+        {errors.password && <p>{errors.password}</p>}
+        <label>
+          Confirm Password
           <input
             type="password"
-            placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-        </div>
-        {errors.confirmPassword && (
-          <p className="error-text">{errors.confirmPassword}</p>
-        )}
-
+        </label>
+        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
         <button type="submit">Sign Up</button>
       </form>
     </>

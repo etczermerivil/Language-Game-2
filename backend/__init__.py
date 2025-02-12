@@ -7,10 +7,10 @@ from flask_login import LoginManager
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
-from .seeds import seed_commands
+# from .seeds import seed_commands
 from .config import Config
 
-
+from backend.seeds.all_seeds import seed_commands
 
 app = Flask(__name__, static_folder='../frontend/dist', static_url_path='/')
 
