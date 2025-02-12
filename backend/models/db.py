@@ -3,16 +3,12 @@ import os
 
 db = SQLAlchemy()
 
-# Get environment and schema settings
-environment = os.getenv("FLASK_ENV", "development")  # Default to development if not set
-SCHEMA = os.getenv("SCHEMA", "")  # Default to empty if not set
+# Get environment variables
+environment = os.getenv("FLASK_ENV", "development")  # Default to "development"
+SCHEMA = os.getenv("SCHEMA", None)  # Use None instead of ""
 
-# Helper function for adding prefix to foreign key column references in production
+# Helper function for adding schema prefixes **only if schema is set**
 def add_prefix_for_prod(attr):
-    """
-    Adds schema prefix to table attributes in production mode.
-    Only applies to PostgreSQL, not SQLite.
-    """
-    if environment == "production" and SCHEMA:
+    if environment == "production" and SCHEMA:  # Only use schema if it's set
         return f"{SCHEMA}.{attr}"
     return attr
