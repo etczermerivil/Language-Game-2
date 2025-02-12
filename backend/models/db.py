@@ -12,20 +12,3 @@ def add_prefix_for_prod(attr):
         return f"{SCHEMA}.{attr}"
     else:
         return attr
-
-# Association table for Decks and Words
-deck_cards = db.Table(
-    'deck_cards',
-    db.Column(
-        'deck_id',
-        db.Integer,
-        db.ForeignKey(add_prefix_for_prod('decks.id')),
-        primary_key=True
-    ),
-    db.Column(
-        'word_id',
-        db.Integer,
-        db.ForeignKey(add_prefix_for_prod('words.id')),
-        primary_key=True
-    )
-)

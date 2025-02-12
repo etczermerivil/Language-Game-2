@@ -1,4 +1,4 @@
-from .db import db, deck_cards, environment, SCHEMA, add_prefix_for_prod
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Word(db.Model):
     __tablename__ = 'words'
@@ -19,10 +19,9 @@ class Word(db.Model):
     part_of_speech = db.relationship('PartOfSpeech', back_populates='words')
     language = db.relationship('Language', back_populates='words')
 
-    # ✅ FIXED: Ensure schema-aware `deck_cards` association
+
     decks = db.relationship(
         "Deck",
-        secondary=add_prefix_for_prod("deck_cards"),
         back_populates="words"
     )
 

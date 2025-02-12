@@ -17,10 +17,11 @@ class Deck(db.Model):
     )
 
     user = db.relationship("User", back_populates="decks")
+
+    # Change this relationship to directly reference Word
     words = db.relationship(
         "Word",
-        secondary="deck_cards",
-        back_populates="decks"
+        back_populates="deck"
     )
 
     def to_dict(self):
