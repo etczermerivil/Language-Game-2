@@ -45,11 +45,22 @@ def seed_languages():
     print("Languages seeded.")
 
 def seed_parts_of_speech():
-    noun = PartOfSpeech(name="Noun", color_code="#1E90FF")
-    verb = PartOfSpeech(name="Verb", color_code="#FF0000")
-    db.session.add_all([noun, verb])
+    parts_of_speech = [
+        PartOfSpeech(name="Noun", color_code="#1E90FF"),       # Dodger Blue
+        PartOfSpeech(name="Verb", color_code="#FF0000"),       # Red
+        PartOfSpeech(name="Adjective", color_code="#8A2BE2"),  # Blue Violet
+        PartOfSpeech(name="Article", color_code="#FFD700"),    # Gold
+        # PartOfSpeech(name="Pronoun", color_code="#32CD32"),
+        # PartOfSpeech(name="Adverb", color_code="#FF8C00"),
+        # PartOfSpeech(name="Preposition", color_code="#00CED1"),
+        # PartOfSpeech(name="Conjunction", color_code="#DC143C"),
+        # PartOfSpeech(name="Interjection", color_code="#FF69B4")
+    ]
+
+    db.session.add_all(parts_of_speech)
     db.session.commit()
-    print("Parts of Speech seeded.")
+    print("Parts of Speech seeded successfully.")
+
 
 def seed_words():
     # Adjust CSV name/path if needed

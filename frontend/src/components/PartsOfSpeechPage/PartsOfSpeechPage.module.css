@@ -79,18 +79,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 550;
   text-align: center;
   position: relative;
   z-index: 1;
   transition: all 0.3s ease;
   box-shadow: 0 0 15px rgba(24, 24, 24, 0.958);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: 10px; /* Add padding to prevent overflow */
+  max-width: 100%; /* Ensure text stays inside */
+  display: flex;
+  flex-direction: column; /* Stack text properly */
+  line-height: 1.2; /* Improve spacing between lines */
 }
+
 
 .partBox:hover {
   animation: glow 1s ease-in-out infinite;
