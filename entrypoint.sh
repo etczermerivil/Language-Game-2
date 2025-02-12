@@ -11,7 +11,7 @@ flask db upgrade
 
 
 # Run seeding
-flask seed all || echo "Seeding failed or was already applied."
+flask seed_cli all || echo "Seeding failed or was already applied."
 
 # Start the application
 exec gunicorn backend:app

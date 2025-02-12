@@ -7,7 +7,7 @@ from .decks import seed_decks, undo_decks
 from backend.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
-seed_commands = AppGroup('seed')
+seed_cli = AppGroup('seed_cli')
 
 
 # Creates the `flask seed all` command

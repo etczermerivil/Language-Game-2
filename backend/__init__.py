@@ -7,15 +7,15 @@ from flask_login import LoginManager
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
-from .seeds import seed_commands
+from .seeds import seed_cli
 from .config import Config
 
 
 
 app = Flask(__name__, static_folder='../frontend/dist', static_url_path='/')
 
-# Tell flask about our seed commands
-app.cli.add_command(seed_commands)
+
+app.cli.add_command(seed_cli)
 
 
 # Setup login manager
