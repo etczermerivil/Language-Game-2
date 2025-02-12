@@ -11,7 +11,7 @@ seed_cli = AppGroup('seed_cli')
 
 
 # Creates the `flask seed all` command
-@seed_commands.command('all')
+@seed_cli.command('all')
 def seed():
     if environment == 'production':
         undo()
@@ -35,7 +35,7 @@ def seed():
 
 
 # Creates the `flask seed undo` command
-@seed_commands.command('undo')
+@seed_cli.command('undo')
 def undo():
     undo_decks()
     db.session.commit()
