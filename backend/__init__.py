@@ -9,9 +9,14 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .seeds import seed_commands
 from .config import Config
-from backend.seeds import seed_commands
+
+
 
 app = Flask(__name__, static_folder='../frontend/dist', static_url_path='/')
+
+# Tell flask about our seed commands
+app.cli.add_command(seed_commands)
+
 
 # Setup login manager
 login = LoginManager(app)
@@ -23,8 +28,6 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-# Tell flask about our seed commands
-app.cli.add_command(seed_commands)
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
