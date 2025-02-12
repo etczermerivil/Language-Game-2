@@ -2,19 +2,24 @@ from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .languages import seed_languages, undo_languages
 from .parts_of_speech import seed_parts_of_speech, undo_parts_of_speech
-from .words import seed_words, undo_words  # Renamed from seed_data.py
+from .words import seed_words, undo_words
 from .decks import seed_decks, undo_decks
 from backend.models.db import db, environment, SCHEMA
 
+
 # Creates a seed group to hold our commands
-seed_cli = AppGroup('seed_cli')
+seed_commands = AppGroup('seed')
 
 
 # Creates the `flask seed all` command
-@seed_cli.command('all')
+@seed_commands.command('all')
 def seed():
     if environment == 'production':
-        undo()
+        undo_users()
+        undo_languages()
+        undo_parts_of_speech()
+        undo_words()
+        undo_decks()
 
     seed_users()
     db.session.commit()
@@ -35,7 +40,7 @@ def seed():
 
 
 # Creates the `flask seed undo` command
-@seed_cli.command('undo')
+@seed_commands.command('undo')
 def undo():
     undo_decks()
     db.session.commit()
