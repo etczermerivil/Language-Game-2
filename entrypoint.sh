@@ -1,6 +1,10 @@
 #!/bin/sh
 set -e  # Exit immediately if a command fails
-export FLASK_APP=backend
+
+echo ">>> FLASK_APP is set to: $FLASK_APP"
+flask --help
+
+# export FLASK_APP=backend
 
 # Run migrations
 flask db upgrade
