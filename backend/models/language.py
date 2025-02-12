@@ -12,7 +12,6 @@ class Language(db.Model):
 
     # Relationships
     words = db.relationship('Word', back_populates='language', cascade='all, delete-orphan')
-    patterns = db.relationship('LanguagePattern', back_populates='language', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {

@@ -27,6 +27,15 @@ def undo_users():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM users"))
+        db.session.execute("DELETE FROM users;")
+
+        # ✅ Check if sqlite_sequence table exists before deleting from it
+        check_sequence = db.session.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='sqlite_sequence';"
+        ).fetchone()
+
+        if check_sequence:
+            db.session.execute("DELETE FROM sqlite_sequence WHERE name='users';")
 
     db.session.commit()
+    print("Users table cleared.")

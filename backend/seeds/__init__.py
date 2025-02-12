@@ -1,10 +1,12 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
-
+from .languages import seed_languages, undo_languages
+from .parts_of_speech import seed_parts_of_speech, undo_parts_of_speech
+from .words import seed_words, undo_words  # Renamed from seed_data.py
+from .decks import seed_decks, undo_decks
 from backend.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
-# So we can type `flask seed --help`
 seed_commands = AppGroup('seed')
 
 
@@ -12,17 +14,42 @@ seed_commands = AppGroup('seed')
 @seed_commands.command('all')
 def seed():
     if environment == 'production':
-        # Before seeding in production, you want to run the seed undo
-        # command, which will  truncate all tables prefixed with
-        # the schema name (see comment in users.py undo_users function).
-        # Make sure to add all your other model's undo functions below
-        undo_users()
+        undo()
+
     seed_users()
-    # Add other seed functions here
+    db.session.commit()
+
+    seed_languages()
+    db.session.commit()
+
+    seed_parts_of_speech()
+    db.session.commit()
+
+    seed_words()
+    db.session.commit()
+
+    seed_decks()
+    db.session.commit()
+
+    print("Seeding completed successfully.")
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_decks()
+    db.session.commit()
+
+    undo_words()
+    db.session.commit()
+
+    undo_parts_of_speech()
+    db.session.commit()
+
+    undo_languages()
+    db.session.commit()
+
     undo_users()
-    # Add other undo functions here
+    db.session.commit()
+
+    print("All tables cleared successfully.")
