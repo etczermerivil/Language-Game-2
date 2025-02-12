@@ -18,5 +18,11 @@ RUN pip install psycopg2
 
 COPY . .
 
-# ✅ Run migrations & seeding when the container starts
-CMD flask db upgrade && flask seed all && gunicorn backend:app
+# Copy entrypoint script into the container
+COPY entrypoint.sh /entrypoint.sh
+
+# Make the script executable
+RUN chmod +x /entrypoint.sh
+
+# Use the script as the container's entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
