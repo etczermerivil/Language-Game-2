@@ -130,6 +130,7 @@ const handleDeleteCardClick = () => {
     fetch('/api/cards') // Replace with your actual API endpoint
       .then((response) => response.json())
       .then((data) => {
+        console.log('Fetched cards:', data);
         setCards(data);
         setTimeout(() => {
           const swiper = swiperRef.current;

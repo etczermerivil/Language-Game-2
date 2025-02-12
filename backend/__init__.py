@@ -7,6 +7,9 @@ from flask_login import LoginManager
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.card_routes import card_routes
+from .api.color_routes import color_routes
+
 from .config import Config
 from backend.seeds.all_seeds import seed_commands
 
@@ -37,14 +40,19 @@ login.login_view = 'auth.unauthorized'
 
 @login.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    try:
+        return User.query.get(int(id))
+    except ValueError:
+        return None
 
 # 🔹 Register Blueprints
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(card_routes, url_prefix='/api/cards')
+app.register_blueprint(color_routes, url_prefix='/api/colors')
 
 # 🔹 Security and Middleware
-CORS(app)
+CORS(app, supports_credentials=True)
 
 @app.before_request
 def https_redirect():
@@ -60,7 +68,7 @@ def inject_csrf_token(response):
         generate_csrf(),
         secure=True if os.environ.get('FLASK_ENV') == 'production' else False,
         samesite='Strict' if os.environ.get('FLASK_ENV') == 'production' else None,
-        httponly=True)
+        httponly=False)
     return response
 
 # 🔹 API Documentation
