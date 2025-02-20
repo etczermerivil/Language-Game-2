@@ -18,9 +18,13 @@ This web application enhances engagement with **dynamic card interactions**, **v
 
 ## 🌟 Features
 ✅ **Developed an interactive flashcard system** to teach parts of speech dynamically.
+<br>
 ✅ **Created a visually engaging UI**, making language learning fun and intuitive.
+<br>
 ✅ **Designed multiple categories**, allowing users to explore different **word types and languages**.
+<br>
 ✅ **Integrated animated transitions** for smooth navigation between language decks.
+<br>
 
 ---
 
