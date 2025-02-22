@@ -1,5 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
+import { Tooltip } from "react-tooltip"; // ✅ Import Tooltip
+import "react-tooltip/dist/react-tooltip.css"; // ✅ Import Tooltip CSS
 import "./Navigation.css";
 
 function Navigation() {
@@ -32,15 +34,19 @@ function Navigation() {
               Cards
             </NavLink>
           </li>
+
+      {/* Languages - Coming Soon (Disabled) */}
           <li className="nav-item">
-            <NavLink to="/languages" className="nav-link">
+            <span className="nav-link disabled-link" data-tooltip-id="coming-soon-tooltip">
               Languages
-            </NavLink>
+            </span>
           </li>
+
+          {/* Decks - Coming Soon (Disabled) */}
           <li className="nav-item">
-            <NavLink to="/decks" className="nav-link">
+            <span className="nav-link disabled-link" data-tooltip-id="coming-soon-tooltip">
               Decks
-            </NavLink>
+            </span>
           </li>
 
           {/* PROFILE BUTTON (HAMBURGER) */}
@@ -49,11 +55,17 @@ function Navigation() {
           </li>
         </ul>
       </nav>
+
+      {/* ✅ Tooltip Component */}
+      <Tooltip id="coming-soon-tooltip" place="top" effect="solid">
+        Feature Coming Soon
+      </Tooltip>
     </div>
   );
 }
 
 export default Navigation;
+
 
 
 

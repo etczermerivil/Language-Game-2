@@ -14,6 +14,15 @@
   position: fixed;
 }
 
+.disabled-link {
+  cursor: pointer; /* Keeps pointer cursor */
+  opacity: 0.6; /* Makes it look disabled */
+  pointer-events: auto; /* Re-enables hover for tooltip */
+}
+
+.disabled-link:hover {
+  /* text-decoration: underline; */
+}
 
 .logo-item {
   margin-right: 50px; /* adjust as needed for spacing between WP and other links */
