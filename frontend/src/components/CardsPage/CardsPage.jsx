@@ -208,7 +208,7 @@ const handleDeleteCardClick = () => {
 
 
   return (
-    // Use position: relative so #particles-js can sit behind it (z-index layering)
+
     <div
       className={styles.pageContainer}
       style={{ position: "relative", minHeight: "100vh" }}

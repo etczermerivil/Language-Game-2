@@ -11,10 +11,10 @@
 .pageContainer {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Optional: Use column layout for stacking content */
+  justify-content: center; /* Center content vertically */
   align-items: center;
 }
 
@@ -26,14 +26,13 @@
   gap: 20px;
   max-width: 1500px; margin: 0 auto;
   overflow: visible;
-  /* height: auto; */
 }
 
 .swiperBox {
   flex: 0;
   width: 100%;
   max-width: 1400px;
-  height: auto;
+  height: 550px;
   background: none;
   padding: 10px;
   display: flex;
@@ -71,7 +70,7 @@
   perspective: 1000px; /* 3D perspective for flip effect */
   position: relative;
   width: 250px;  /* Card width */
-  height: auto;
+  height: 400px; /* Card height */
   margin: 0 auto;
 }
 
@@ -354,84 +353,65 @@ s
 @media (max-width: 1250px) {
   .mainContent {
     max-width: 1200px;
-    gap: 15px;
   }
-
-
-
 
   .swiperBox {
     max-width: 1100px;
-    height: 500px;
+    min-height: 550px; /* ✅ Ensure enough height */
   }
 
   .flipCard {
     width: 220px;
-    height: 370px;
-  }
-
-  .cardTitle {
-    font-size: 40px;
+    min-height: 370px;
   }
 }
 
-/* 🌐 For screens smaller than 1024px */
+/* 🌐 Fix for Screens Smaller than 1024px */
 @media (max-width: 1024px) {
   .mainContent {
-    flex-direction: column; /* ✅ Stack items vertically */
+    flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 90%; /* ✅ Reduce width slightly */
+    max-width: 90%;
   }
 
   .swiperBox {
     max-width: 900px;
-    height: 450px;
-  }
-
-  /* ✅ Move buttonBox below swiperBox */
-  .buttonBox {
-    max-width: 150px;
-    width: 100%;
-    margin-top: 20px; /* Add spacing */
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
+    min-height: 500px; /* ✅ Ensure enough space */
   }
 
   .flipCard {
     width: 200px;
-    height: 340px;
+    min-height: 340px;
   }
 
-  .cardTitle {
-    font-size: 36px;
+  .buttonBox {
+    max-width: 150px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
   }
 }
 
-/* 🌐 For screens smaller than 768px */
+/* 🌐 Fix for Screens Smaller than 768px */
 @media (max-width: 768px) {
   .mainContent {
     flex-direction: column;
     gap: 10px;
-    max-width: 100%; /* ✅ Full width */
+    max-width: 100%;
   }
 
   .swiperBox {
     max-width: 100%;
-    height: auto;
+    min-height: auto;
   }
 
   .flipCard {
     width: 180px;
-    height: 320px;
+    min-height: 320px;
   }
 
-  .cardTitle {
-    font-size: 30px;
-  }
-
-  /* ✅ Ensure buttonBox is always visible */
   .buttonBox {
     max-width: 100px;
     width: 100%;
