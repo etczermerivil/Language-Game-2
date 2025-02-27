@@ -11,10 +11,10 @@
 .pageContainer {
   position: relative;
   width: 100%;
-  min-height: 100vh; /* Ensure it covers the full viewport height */
-  display: flex; /* Enable flexbox */
-  flex-direction: column; /* Optional: Use column layout for stacking content */
-  justify-content: center; /* Center content vertically */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -26,13 +26,14 @@
   gap: 20px;
   max-width: 1500px; margin: 0 auto;
   overflow: visible;
+  /* height: auto; */
 }
 
 .swiperBox {
   flex: 0;
   width: 100%;
   max-width: 1400px;
-  height: 550px;
+  height: auto;
   background: none;
   padding: 10px;
   display: flex;
@@ -70,7 +71,7 @@
   perspective: 1000px; /* 3D perspective for flip effect */
   position: relative;
   width: 250px;  /* Card width */
-  height: 400px; /* Card height */
+  height: auto;
   margin: 0 auto;
 }
 
@@ -347,5 +348,95 @@ s
   }
   100% {
     background: #FF4C4C;
+  }
+}
+
+@media (max-width: 1250px) {
+  .mainContent {
+    max-width: 1200px;
+    gap: 15px;
+  }
+
+
+
+
+  .swiperBox {
+    max-width: 1100px;
+    height: 500px;
+  }
+
+  .flipCard {
+    width: 220px;
+    height: 370px;
+  }
+
+  .cardTitle {
+    font-size: 40px;
+  }
+}
+
+/* 🌐 For screens smaller than 1024px */
+@media (max-width: 1024px) {
+  .mainContent {
+    flex-direction: column; /* ✅ Stack items vertically */
+    align-items: center;
+    text-align: center;
+    max-width: 90%; /* ✅ Reduce width slightly */
+  }
+
+  .swiperBox {
+    max-width: 900px;
+    height: 450px;
+  }
+
+  /* ✅ Move buttonBox below swiperBox */
+  .buttonBox {
+    max-width: 150px;
+    width: 100%;
+    margin-top: 20px; /* Add spacing */
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  .flipCard {
+    width: 200px;
+    height: 340px;
+  }
+
+  .cardTitle {
+    font-size: 36px;
+  }
+}
+
+/* 🌐 For screens smaller than 768px */
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column;
+    gap: 10px;
+    max-width: 100%; /* ✅ Full width */
+  }
+
+  .swiperBox {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .flipCard {
+    width: 180px;
+    height: 320px;
+  }
+
+  .cardTitle {
+    font-size: 30px;
+  }
+
+  /* ✅ Ensure buttonBox is always visible */
+  .buttonBox {
+    max-width: 100px;
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
   }
 }
