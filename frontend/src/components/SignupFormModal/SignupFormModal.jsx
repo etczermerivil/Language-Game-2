@@ -5,8 +5,10 @@ import { thunkSignup } from "../../redux/session";
 import "./SignupForm.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faUser, faLock } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 function SignupFormModal() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -26,19 +28,22 @@ function SignupFormModal() {
     }
 
     const serverResponse = await dispatch(
-      thunkSignup({
-        email,
-        username,
-        password,
-      })
-    );
+    thunkSignup({
+      email,
+      username,
+      password,
+    })
+  );
 
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
-      closeModal();
-    }
-  };
+  if (serverResponse) {
+    setErrors(serverResponse);
+  } else {
+    closeModal();
+    setTimeout(() => {
+      navigate("/cards");  // <-- Add this redirect
+    }, 100);
+  }
+};
 
   return (
     <>
